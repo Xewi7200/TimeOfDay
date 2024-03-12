@@ -8,13 +8,26 @@ import org.junit.jupiter.api.Test;
 class TimeOfDayTest {
 
 	@Test
-	/** Krijgt integers uur, min en sec mee en convert het naar een duidelijke string
-	 * @pre uur is tussen de 0 en 23, min en sec zijn tussen de 0 en 60
-	 * 	| 0 <= uur && uur <= 23 && 0 <= min && min <= 59 && 0 <= sec && sec <= 59
-	 * @post Het resultaat is een string
-	 */
-	String time(int uur, int min, int sec) {
-		return uur + "u" + min + "min" + sec + "sec";
+	void test() {
+		TimeOfDay myTimeOfDay = new TimeOfDay(10, 30);
+		assertEquals(10, myTimeOfDay.getHours());
+		assertEquals(30, myTimeOfDay.getMinutes());
+		assertEquals(630, myTimeOfDay.getMinutesSinceMidnight());
+		
+		myTimeOfDay.setHours(11);
+		assertEquals(11, myTimeOfDay.getHours());
+		assertEquals(30, myTimeOfDay.getMinutes());
+		assertEquals(690, myTimeOfDay.getMinutesSinceMidnight());
+		
+		myTimeOfDay.setMinutes(45);
+		assertEquals(11, myTimeOfDay.getHours());
+		assertEquals(45, myTimeOfDay.getMinutes());
+		assertEquals(705, myTimeOfDay.getMinutesSinceMidnight());
+		
+		myTimeOfDay.setMinutesSinceMidnight(90);
+		assertEquals(1, myTimeOfDay.getHours());
+		assertEquals(30, myTimeOfDay.getMinutes());
+		assertEquals(90, myTimeOfDay.getMinutesSinceMidnight());
 	}
 
 }

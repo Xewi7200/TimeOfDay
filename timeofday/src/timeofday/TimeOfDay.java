@@ -13,7 +13,7 @@ package timeofday;
  * Elke instantie van deze klase slaat een tijdstip op, geg door een aantal uren sinds middernacht en een aantal min binnen het uur
  * 
  * @invar	| getMinutesSinceMidnight() == getHours() * 60 + getMinutes()
- * @invar	| 0 <= getHours() && getHours( <= 23
+ * @invar	| 0 <= getHours() && getHours() <= 23
  * @invar 	| 0 <= getMinutes() && getMinutes() <= 59
  */
 
@@ -22,11 +22,14 @@ package timeofday;
 
 public class TimeOfDay {
 	
-	public int getHours() {throw new RunTimeException("Not yet implemented"); }
+	private int hours;
+	private int minutes;
 	
-	public int getMinutes() {throw new RunTimeException("Not yet implemented"); }
+	public int getHours() {return hours;}
 	
-	public int getSeconds() {throw new RunTimeException("Not yet implemented"); }
+	public int getMinutes() {return minutes; }
+	
+	public int getMinutesSinceMidnight() {return hours * 60 + minutes; }
 	/**
 	 * Inittialiseert het nieuwe object met de geg uren en min
 	 * @pre	| 0 <= initialHours && initialHours <= 23
@@ -34,16 +37,22 @@ public class TimeOfDay {
 	 * 
 	 */
 	
-	public TimeOfDay(int initialhHours, int initialMinutes) {throw new RunTimeException("Not yet implemented"); }
+	public TimeOfDay(int initialHours, int initialMinutes) {
+		this.hours = initialHours;
+		this.minutes = initialMinutes;
+	}
 	
 	/**
 	 * nest
 	 */
 	
-	public void setHours(int newHours) {throw new RunTimeException("Not yet implemented"); }
+	public void setHours(int newHours) {hours = newHours; }
 	
-	public void setMinutes(int newMinutes) {throw new RunTimeException("Not yet implemented"); }
+	public void setMinutes(int newMinutes) {minutes = newMinutes; }	//had ook ipv newMinutes minutes kunnen kiezen maar dan had je {this.minutes = minutes;} moeten doen
 	
-	public void setminutesSinceMidnight(int newMinutesSinceMidnight) {throw new RunTimeException("Not yet implemented"); }
+	public void setMinutesSinceMidnight(int newMinutesSinceMidnight) {
+		hours = newMinutesSinceMidnight / 60;
+		minutes = newMinutesSinceMidnight % 60;
+	}
 
 }
