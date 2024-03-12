@@ -13,7 +13,7 @@ package timeofday;
  * Elke instantie van deze klase slaat een tijdstip op, geg door een aantal uren sinds middernacht en een aantal min binnen het uur
  * 
  * @invar	| getMinutesSinceMidnight() == getHours() * 60 + getMinutes()
- * @invar	| 0 <= getHours() && getHours( <= 23
+ * @invar	| 0 <= getHours() && getHours() <= 23
  * @invar 	| 0 <= getMinutes() && getMinutes() <= 59
  */
 
@@ -22,28 +22,40 @@ package timeofday;
 
 public class TimeOfDay {
 	
-	public int getHours() {throw new RunTimeException("Not yet implemented"); }
-	
-	public int getMinutes() {throw new RunTimeException("Not yet implemented"); }
-	
-	public int getSeconds() {throw new RunTimeException("Not yet implemented"); }
 	/**
-	 * Inittialiseert het nieuwe object met de geg uren en min
+	 * @invar | 0 <= minutesSinceMidnight && minutesSinceMidnight < 24 * 60
+	 */
+	private int minutesSinceMidnight;
+	
+	public int getHours() {return minutesSinceMidnight / 60; }
+	
+	public int getMinutes() {return minutesSinceMidnight % 60; }
+	
+	public int getMinutesSinceMidnight() {return minutesSinceMidnight; }
+	/**
+	 * Initialiseert het nieuwe object met de geg uren en min
 	 * @pre	| 0 <= initialHours && initialHours <= 23
 	 * @pre	| 0 <= initialMinutes && initialMinutes <= 59
 	 * 
 	 */
 	
-	public TimeOfDay(int initialhHours, int initialMinutes) {throw new RunTimeException("Not yet implemented"); }
+	public TimeOfDay(int initialHours, int initialMinutes) {
+		minutesSinceMidnight = initialHours * 60 + initialMinutes;
+	}
 	
 	/**
 	 * nest
 	 */
 	
-	public void setHours(int newHours) {throw new RunTimeException("Not yet implemented"); }
+	public void setHours(int newHours) {minutesSinceMidnight = newHours * 60 + getMinutes(); }
 	
-	public void setMinutes(int newMinutes) {throw new RunTimeException("Not yet implemented"); }
+	public void setMinutes(int newMinutes) {
+		minutesSinceMidnight -= getMinutes();
+		minutesSinceMidnight += newMinutes;
+	}
 	
-	public void setminutesSinceMidnight(int newMinutesSinceMidnight) {throw new RunTimeException("Not yet implemented"); }
+	public void setMinutesSinceMidnight(int newMinutesSinceMidnight) {
+		minutesSinceMidnight = newMinutesSinceMidnight;
+	}
 
 }
